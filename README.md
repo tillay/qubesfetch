@@ -37,7 +37,7 @@ To use:
 
 2. Put this shell script in dom0 home directory and chmod it
 
-3. Make keyboard shortcut through GUI's to run `/home/<username>/screenshot.sh` 
+3. Make keyboard shortcut through GUI's to run `/home/<username>/screenshot.sh <target-qube>` 
 
 ```
 QUBE=$1
