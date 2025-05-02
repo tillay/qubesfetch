@@ -5,11 +5,11 @@ custom fetch scripts for QubesOS
 
 1. Download the qubesfetch script (make sure you are in the home directory)
 
-`wget https://raw.githubusercontent.com/tillay8/qubefetch/refs/heads/main/qubesfetch&&chmod +x qubesfetch`
+`wget https://raw.githubusercontent.com/tillay/qubefetch/refs/heads/main/qubesfetch&&chmod +x qubesfetch`
 
 2. Download the fetchinfo.sh script
 
-`wget https://raw.githubusercontent.com/tillay8/qubefetch/refs/heads/main/fetchinfo.sh&&chmod +x ~/fetchinfo.sh`
+`wget https://raw.githubusercontent.com/tillay/qubefetch/refs/heads/main/fetchinfo.sh&&chmod +x ~/fetchinfo.sh`
 
 3. Move fetchinfo.sh script into dom0
 
@@ -30,3 +30,20 @@ To use:
 4. gaze at your pretty system
 
 ![screenshot](https://raw.githubusercontent.com/tillay8/qubesfetch/refs/heads/main/screenshot.png)
+
+## Bonus: Script to take screenshot on Qubes
+
+1. Make sure xclip is installed in target qube(s)
+
+2. Put this shell script in dom0 home directory and chmod it
+
+3. Make keyboard shortcut through GUI's to run `/home/<username>/screenshot.sh` 
+
+```
+QUBE=$1
+SCREENSHOT="/home/$USER/screenshot.png"
+INCOMING='/home/user/QubesIncoming/dom0/screenshot.png'
+xfce4-screenshooter -r -s $SCREENSHOT
+qvm-move-to-vm $QUBE $SCREENSHOT
+qvm-run --pass-io $QUBE -- 'xclip -selection clipboard -t image/png -i '$INCOMING' &&rm '$INCOMING''
+```
